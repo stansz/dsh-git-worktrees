@@ -143,6 +143,16 @@ session rather than two.
 Installed without the core, this bundle fails at activation with the loader's
 sentence naming the missing core rather than mounting half of itself.
 
+## Tests
+
+`node --test` from the repository root: no install step, no network. Every
+fixture is a real git repository and a real worktree in a temporary directory,
+and each test checks both the tool result and the repository afterwards — the
+worktree exists or does not, the branch is still here, the marker is gone. The
+guard is driven with the exec shapes the Host sends, against protected and
+unprotected checkouts, including a symlink that tries to escape into the main
+checkout. The suite loads `dsh-git-core` from the sibling checkout, which is why
+CI checks that repository out beside this one.
 ## Files
 
 - `index.js` — the Cordis plugin: `name`, `inject`, `apply`.
