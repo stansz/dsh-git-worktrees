@@ -1,0 +1,27 @@
+name: tests
+
+# Node's built-in test runner over real git repositories and real worktrees.
+# The bundle loads the shared core from a sibling directory, so the core is
+# checked out beside this repository.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: dsh-git-worktrees
+      - uses: actions/checkout@v4
+        with:
+          repository: stansz/dsh-git-core
+          path: dsh-git-core
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Run the suite
+        working-directory: dsh-git-worktrees
+        run: node --test
