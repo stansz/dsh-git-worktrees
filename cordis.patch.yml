@@ -1,0 +1,19 @@
+# Bundle patch for dsh-git-worktrees.
+#
+# One inserted row. It mounts this package's Host half, which contributes:
+#
+#   ctx.tools.register()          -> the 'worktree' tool (start, list, remove)
+#   ctx.on('tools/pre-execute')   -> the worktree guard: a file edit aimed at a
+#                                    repository on a protected branch is refused
+#                                    and pointed at action "start"
+#
+# The row id is unique to this bundle, so nothing shipped is overridden and no
+# base row's config has to be restated. Delete this entry to remove both
+# contributions at once.
+#
+# Nothing here needs a config block: every field has a default. Change one by
+# overriding this row in the profile's own patch layer, which survives Harness
+# upgrades and is read when the plugin mounts.
+- insert:
+    - id: dsh-git-worktrees
+      name: 'dsh-git-worktrees'

@@ -1,0 +1,23 @@
+{
+  "name": "dsh-git-worktrees",
+  "version": "0.1.0",
+  "private": true,
+  "description": "One git worktree per task: a worktree tool (start, list, remove) and the guard that refuses a file edit landing in a repository sitting on a protected branch.",
+  "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "dependencies": {
+    "dsh-git-core": "link:../dsh-git-core"
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "docs",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
