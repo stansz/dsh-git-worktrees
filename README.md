@@ -29,17 +29,16 @@ proofs.
 
 ## Install
 
-`package.json` declares `"dsh-git-core": "link:../dsh-git-core"`. Install
-order is [dsh-git-core](https://github.com/stansz/dsh-git-core) first, then
-this bundle and/or [dsh-git](https://github.com/stansz/dsh-git).
+`package.json` declares `"dsh-git-core": "link:../dsh-git-core"`. Install order is
+[dsh-git-core](https://github.com/stansz/dsh-git-core) first, then this bundle and/or
+[dsh-git](https://github.com/stansz/dsh-git); the dsh-git repository's install page
+covers the profile side.
 
-A `link:` install does not hoist a bundle's dependencies, so a bare
-`import 'dsh-git-core/git.mjs'` would not resolve from this package. The
-shims in `lib/` (`git.mjs`, `state.mjs`, `merge-proof.mjs`) re-export the
-core through `lib/core-loader.mjs`, which probes the sibling directory,
-`$DSH_PROFILE_DIR/node_modules`, the working directory and
-`<cwd>/node_modules`, and fails with a sentence naming what to install instead
-of a bare `ERR_MODULE_NOT_FOUND` at activation.
+A `link:` install does not hoist a bundle's dependencies, so the shims in `lib/`
+(`git.mjs`, `state.mjs`, `merge-proof.mjs`) re-export the core through
+`lib/core-loader.mjs`. The loader probes the sibling directory, the profile's
+`node_modules` and the working directory, and fails with a sentence naming the missing
+core instead of a bare `ERR_MODULE_NOT_FOUND` at activation.
 
 ## The tool
 
@@ -131,10 +130,8 @@ and terminal are untouched.
 ## Dependency: dsh-git-core, and the shared state store
 
 The git commands, the state store and the merge proofs live in
-[dsh-git-core](https://github.com/stansz/dsh-git-core). This bundle carries no
-git operations of its own; `lib/git.mjs`, `lib/state.mjs` and
-`lib/merge-proof.mjs` are shims over the core, resolved by
-`lib/core-loader.mjs` as described under Install.
+[dsh-git-core](https://github.com/stansz/dsh-git-core); this bundle carries no git
+operations of its own.
 
 What this bundle reads and writes there is the core's per-session state file,
 `<stateRoot>/dsh-git/sessions/<safeSessionId>.json`: it records each worktree a
