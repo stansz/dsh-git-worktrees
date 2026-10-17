@@ -6,6 +6,12 @@
   "license": "MIT",
   "type": "module",
   "main": "index.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
     "dsh-git-core": "link:../dsh-git-core"
   },
